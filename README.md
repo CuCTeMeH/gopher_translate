@@ -1,6 +1,4 @@
-# gopher_translate
-Gopher Translator Service
-
+# Gopher Translator Service
 
 Gophers are friendly creatures but it’s not that easy to communicate with them. They have their own language and they don’t understand English.
 Create a program that starts http server. This server should be able to translate English words into words in the gophers' language. Don't worry, the gophers' language is pretty easy.
