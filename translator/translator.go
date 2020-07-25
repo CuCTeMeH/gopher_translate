@@ -18,6 +18,7 @@ func TranslateWord(word string) (string, error) {
 
 	word = strings.ToLower(word)
 
+	//if the word is already translated in history return it directly instead of translating it again.
 	wh := Storage.Load(word)
 	if wh != "" {
 		return fmt.Sprintf("%v", wh), nil
