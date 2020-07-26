@@ -23,5 +23,5 @@ test: ## Launch tests
 build: ## Build the app
 	go install
 
-all: ## Install, Test
+all: ## Dep, Test and Install
 	make dep && make test && make build
