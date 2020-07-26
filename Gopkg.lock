@@ -26,6 +26,14 @@
   version = "v1.0.1"
 
 [[projects]]
+  digest = "1:25ebe6496abb289ef977c081b2d49f56dd97c32db4ca083d37f95923909ced02"
+  name = "github.com/gorilla/mux"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "75dcda0896e109a2a22c9315bca3bb21b87b2ba5"
+  version = "v1.7.4"
+
+[[projects]]
   digest = "1:09cb61dc19af93deae01587e2fdb1c081e0bf48f1a5ad5fa24f48750dc57dce8"
   name = "github.com/konsorten/go-windows-terminal-sequences"
   packages = ["."]
@@ -128,9 +136,11 @@
   revision = "0e2f3a69832c9e0de74996506b9f1373a5873c56"
 
 [[projects]]
-  digest = "1:27f1a11ecfee360418360997a013764fd4da959413ad1a8ac2ea5b38508048fc"
+  digest = "1:bfa5d6957fcc9c39b74aa06726e71f36cc30352ffac3a9c91cda6e24038ef55c"
   name = "golang.org/x/text"
   packages = [
+    "collate",
+    "collate/build",
     "encoding",
     "encoding/charmap",
     "encoding/htmlindex",
@@ -141,15 +151,20 @@
     "encoding/simplifiedchinese",
     "encoding/traditionalchinese",
     "encoding/unicode",
+    "internal/colltab",
     "internal/gen",
     "internal/language",
     "internal/language/compact",
     "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
     "internal/utf8internal",
     "language",
     "runes",
     "transform",
     "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
   ]
   pruneopts = "UT"
   revision = "23ae387dee1f90d29a23c0e87ee0b46038fbed0e"
@@ -188,9 +203,11 @@
   input-imports = [
     "github.com/go-chi/chi",
     "github.com/go-chi/render",
+    "github.com/gorilla/mux",
     "github.com/onsi/ginkgo",
     "github.com/onsi/gomega",
     "github.com/sirupsen/logrus",
+    "golang.org/x/text/unicode/rangetable",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
