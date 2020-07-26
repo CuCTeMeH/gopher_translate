@@ -21,7 +21,7 @@ var _ = Describe("History API methods", func() {
 			"jumps": "umpsjogo",
 			"lazy":  "azylogo",
 			"over":  "gover",
-			"quick": "uickqogo",
+			"quick": "ickquogo",
 			"the":   "ethogo",
 		}
 

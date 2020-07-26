@@ -48,7 +48,7 @@ var _ = Describe("Translator API methods", func() {
 		Expect(err).To(BeNil())
 
 		expectedResult := map[string]string{
-			"gopher-sentence": "ethogo uickqogo ownbrogo oxfogo umpsjogo, gover ethogo azylogo ogdogo!",
+			"gopher-sentence": "ethogo ickquogo ownbrogo oxfogo umpsjogo, gover ethogo azylogo ogdogo!",
 		}
 
 		res := ExpectRequest(handler(), "POST", "/sentence", string(enSentenceString))

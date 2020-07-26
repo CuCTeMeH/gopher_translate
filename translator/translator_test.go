@@ -31,7 +31,7 @@ var _ = Describe("Translator methods", func() {
 
 	It("Translate Sentence", func() {
 		se := "The quick brown fox jumps, over the lazy dog!"
-		sg := "ethogo uickqogo ownbrogo oxfogo umpsjogo, gover ethogo azylogo ogdogo!"
+		sg := "ethogo ickquogo ownbrogo oxfogo umpsjogo, gover ethogo azylogo ogdogo!"
 
 		res, err := TranslateSentence(se)
 		Expect(err).To(BeNil())

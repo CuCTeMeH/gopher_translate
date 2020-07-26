@@ -3,7 +3,9 @@ package translator
 import (
 	"errors"
 	"fmt"
+	"golang.org/x/text/unicode/rangetable"
 	"strings"
+	"unicode"
 )
 
 // TranslateWord translates a single word to gophers' language.
@@ -24,40 +26,61 @@ func TranslateWord(word string) (string, error) {
 		return fmt.Sprintf("%v", wh), nil
 	}
 
-	prefix := "g"
-	vowelIndex := strings.Index(word, "xr")
-	if vowelIndex == 0 {
-		prefix = "ge"
-	} else {
-		vowelIndex = strings.IndexAny(word, "aeiou")
-		if vowelIndex == -1 {
-			vowelIndex = strings.Index(word, "y")
-		}
+	words := strings.Split(word, " ")
 
-		if vowelIndex >= 2 && word[vowelIndex-1:vowelIndex+1] == "qu" {
-			vowelIndex++
-		}
+	var res []string
+	for _, str := range words {
+		encoded, _ := encode(str)
+		res = append(res, encoded)
 	}
 
-	if vowelIndex == -1 {
-		return "", fmt.Errorf("'%s' has no vowels", word)
-	}
-
-	var builder strings.Builder
-
-	if vowelIndex == 0 {
-		builder.WriteString(prefix)
-	}
-	builder.WriteString(word[vowelIndex:len(word)])
-	builder.WriteString(word[0:vowelIndex])
-	if vowelIndex != 0 {
-		builder.WriteString("ogo")
-	}
-
-	gopherWord := builder.String()
+	gopherWord := strings.Join(res, " ")
 	Storage.Store(word, gopherWord)
 
 	return gopherWord, nil
+}
+
+func encode(in string) (string, error) {
+	in = strings.ToLower(in)
+	vowel := rangetable.New('a', 'e', 'i', 'o', 'u', 'y')
+
+	var vowelidx int
+
+	for k, v := range in {
+		if unicode.Is(vowel, v) {
+			// weird exceptions for 'u'
+			if v == 'u' && unicode.Is(vowel, rune(in[k+1])) {
+				vowelidx++
+			}
+
+			if in[:k] == "xr" {
+				return "ge" + in[vowelidx:] + in[:vowelidx], nil
+			}
+
+			if in[:k] == "qu" {
+				return in[vowelidx:] + in[:vowelidx] + "quogo", nil
+			}
+
+			vowelidx += k
+			break
+		}
+	}
+
+	if vowelidx == -1 {
+		return "", fmt.Errorf("'%s' has no vowels", in)
+	}
+
+	// add weird exeption for xray
+	if vowelidx == 0 {
+		return "g" + in, nil
+	}
+
+	suffix := ""
+	if vowelidx != 0 {
+		suffix = "ogo"
+	}
+
+	return in[vowelidx:] + in[:vowelidx] + suffix, nil
 }
 
 func punctuation(word string) (string, string) {
