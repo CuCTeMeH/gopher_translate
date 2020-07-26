@@ -30,7 +30,10 @@ func TranslateWord(word string) (string, error) {
 
 	var res []string
 	for _, str := range words {
-		encoded, _ := encode(str)
+		encoded, err := encode(str)
+		if err != nil {
+			return "", err
+		}
 		res = append(res, encoded)
 	}
 
