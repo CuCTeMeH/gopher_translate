@@ -8,6 +8,9 @@ import (
 )
 
 var _ = Describe("Translator API methods", func() {
+	BeforeSuite(func() {
+		translator.InitHistoryStorage()
+	})
 	BeforeEach(func() {
 		translator.ClearStorage()
 	})

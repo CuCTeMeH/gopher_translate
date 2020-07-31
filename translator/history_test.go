@@ -17,6 +17,10 @@ func initHistory() *History {
 }
 
 var _ = Describe("History methods", func() {
+	BeforeSuite(func() {
+		InitHistoryStorage()
+	})
+
 	It("Storing Data", func() {
 		Storage := initHistory()
 		Storage.Store("apple", "gapple")

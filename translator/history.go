@@ -13,7 +13,7 @@ type History struct {
 	Mutex sync.RWMutex
 }
 
-func init() {
+func InitHistoryStorage() {
 	s := &History{
 		Data:  nil,
 		Mutex: sync.RWMutex{},
