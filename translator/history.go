@@ -14,12 +14,14 @@ type History struct {
 }
 
 func InitHistoryStorage() {
-	s := &History{
-		Data:  nil,
-		Mutex: sync.RWMutex{},
-	}
+	if Storage == nil {
+		s := &History{
+			Data:  nil,
+			Mutex: sync.RWMutex{},
+		}
 
-	Storage = s
+		Storage = s
+	}
 }
 
 // Store is a method for saving a translation
